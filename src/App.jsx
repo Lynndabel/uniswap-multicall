@@ -176,7 +176,7 @@ function App() {
     }
     
     const ethersProvider = new ethers.providers.JsonRpcProvider(
-        'https://eth-mainnet.public.blastapi.io'
+        'https://eth-mainnet.g.alchemy.com/v2/9S1GrOW9pT7Gny6HilxN_JsdeiZIWxyI'
     );
     
     const code = await ethersProvider.getCode(pairAddress);
