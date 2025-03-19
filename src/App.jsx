@@ -217,7 +217,7 @@ function App() {
             { target: pairAddress, callData: pairContract.interface.encodeFunctionData('totalSupply') }
         ];
 
-        const [pairBlockNumber, pairReturnData] = await multicallContract.aggregate.staticCall(pairCalls);
+        const [pairBlockNumber, pairReturnData] = await multicallContract.aggregate(pairCalls);
 
         const token0Address = pairContract.interface.decodeFunctionResult('token0', pairReturnData[0])[0];
         const token1Address = pairContract.interface.decodeFunctionResult('token1', pairReturnData[1])[0];
@@ -238,7 +238,7 @@ function App() {
             { target: token1Address, callData: token1Contract.interface.encodeFunctionData('decimals') },
         ];
 
-        const [tokenBlockNumber, tokenReturnData] = await multicallContract.aggregate.staticCall(tokenCalls);
+        const [tokenBlockNumber, tokenReturnData] = await multicallContract.aggregate(tokenCalls);
 
         const token0Name = token0Contract.interface.decodeFunctionResult('name', tokenReturnData[0])[0];
         const token0Symbol = token0Contract.interface.decodeFunctionResult('symbol', tokenReturnData[1])[0];
