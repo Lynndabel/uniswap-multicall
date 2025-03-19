@@ -169,13 +169,15 @@ function App() {
     setPairData(null);
     setError('');
   };
-  const fetchPairData = async () => {
-    if (!ethers.utils.isAddress(pairAddress)) {
+  import { ethers } from "ethers";
+
+const fetchPairData = async () => {
+    if (!ethers.isAddress(pairAddress)) {
         setError('Invalid Ethereum address. Please enter a valid Ethereum contract address.');
         return;
     }
     
-    const ethersProvider = new ethers.providers.JsonRpcProvider(
+    const ethersProvider = new ethers.JsonRpcProvider(
         'https://eth-mainnet.g.alchemy.com/v2/9S1GrOW9pT7Gny6HilxN_JsdeiZIWxyI'
     );
     
@@ -216,7 +218,7 @@ function App() {
         const token1Address = pairContract.interface.decodeFunctionResult('token1', pairReturnData[1])[0];
         const reserves = pairContract.interface.decodeFunctionResult('getReserves', pairReturnData[2]);
         const totalSupplyBN = pairContract.interface.decodeFunctionResult('totalSupply', pairReturnData[3])[0];
-        const totalSupply = ethers.utils.formatUnits(totalSupplyBN, 18);
+        const totalSupply = ethers.formatUnits(totalSupplyBN, 18);
         
         const token0Contract = new ethers.Contract(token0Address, ERC20ABI, ethersProvider);
         const token1Contract = new ethers.Contract(token1Address, ERC20ABI, ethersProvider);
@@ -240,8 +242,8 @@ function App() {
         const token1Symbol = token1Contract.interface.decodeFunctionResult('symbol', tokenReturnData[4])[0];
         const token1Decimals = token1Contract.interface.decodeFunctionResult('decimals', tokenReturnData[5])[0];
 
-        const formattedReserve0 = ethers.utils.formatUnits(reserves[0], token0Decimals);
-        const formattedReserve1 = ethers.utils.formatUnits(reserves[1], token1Decimals);
+        const formattedReserve0 = ethers.formatUnits(reserves[0], token0Decimals);
+        const formattedReserve1 = ethers.formatUnits(reserves[1], token1Decimals);
 
         setPairData({
             token0: {
@@ -273,6 +275,7 @@ function App() {
         setLoading(false);
     }
 };
+
 
 
   const handleSubmit = (e) => {
