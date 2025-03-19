@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { ethers } from 'ethers';
+import { createClient, configureChains, mainnet } from 'wagmi';
+import { publicProvider } from 'wagmi/providers/public';
 import { 
   Box, 
   Container, 
