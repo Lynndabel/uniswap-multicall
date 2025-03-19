@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { ethers } from 'ethers';
-import { createClient, configureChains, mainnet } from 'wagmi';
-import { publicProvider } from 'wagmi/providers/public';
 import { 
   Box, 
   Container, 
@@ -34,12 +32,7 @@ import ERC20ABI from './abis/ERC20.json';
 import UniswapV2PairABI from './abis/uniswapV2Pair.json';
 import MulticallABI from './abis/Multicall.json';
 
-// Configure wagmi client
-const { provider } = configureChains([mainnet], [publicProvider()]);
-const client = createClient({
-  provider,
-  autoConnect: true,
-});
+
 
 // Addresses
 const MULTICALL_ADDRESS = '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696'; // Updated Multicall address
